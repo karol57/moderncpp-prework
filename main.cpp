@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <numeric>
 using namespace std;
 
 
@@ -116,6 +117,10 @@ int sumNumbersFromGenerators(std::vector<GeneratorType> const& types, int num)
 // TODO Write a loop that goes over a collection of GeneratorType values (types) and creates generator for given type, 
 // then sums up all generated values for each type and returns the sum of sums.
 // Use sumGeneratedNumbers to sum generate values for each generator.
+
+    return std::accumulate(types.cbegin(), types.cend(), 0, [num](int a, const GeneratorType& genType){
+        return a + sumGeneratedNumbers(createGenerator(genType), num);
+    });
 }
 
 int main()
